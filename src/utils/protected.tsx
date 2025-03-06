@@ -1,7 +1,10 @@
-import  { useEffect } from 'react';
+import  { ReactNode, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ children }) => {
+interface ProtectedRouteProps {
+    children: ReactNode; 
+}
+const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     const navigate = useNavigate();
 
     useEffect(() => {

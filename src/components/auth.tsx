@@ -13,14 +13,19 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
         email: "",
         password: ""
     })
-
+    interface jwtDecodeType {
+        name: string;
+        Id: string;
+    }
     const sendRequest = async () => {
         try {
             setLoading(true);
             const response = await axios.post(`${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`, postinput)
             const jwt = response.data.token;
             localStorage.setItem("jwt", jwt);
-            const data = jwtDecode(jwt);
+            const data = jwtDecode<jwtDecodeType>(jwt);
+            console.log(data);
+            
             localStorage.setItem("userName", data.name);
             setLoading(false);
             navigate("/posts");
