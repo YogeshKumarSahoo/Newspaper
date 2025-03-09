@@ -29,7 +29,7 @@ export const Posts = () => {
                                 author={post.author.name}
                                 title={post.title}
                                 content={post.content}
-                                date="Oct 28, 2016"
+                                date={post.publishedAt}
                             />
                         </div>
                     </Link>

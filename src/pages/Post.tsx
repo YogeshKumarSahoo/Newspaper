@@ -20,7 +20,7 @@ export const Post = () => {
                 </div>
             </div>
         }
-    const { title, content, author }: PostType = post;
+    const { title, content, author, publishedAt, updatedAt }: PostType = post;
     return <div>
         <Appbar/>
         <div className="flex justify-center m-10">
@@ -28,7 +28,8 @@ export const Post = () => {
                 author={author.name}
                 title={title}
                 content={content}
-                date="October 28, 2016"
+                date={publishedAt ?? updatedAt}
+                tagline={author.tagline}
             />
         </div>
     </div>

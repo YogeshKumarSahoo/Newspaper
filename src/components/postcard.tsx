@@ -6,10 +6,14 @@ interface PostCardProps {
 }
 
 export const PostCard = ({ title, content, author, date}: PostCardProps) => {
+    const dateObj = new Date(date);
+    const formattedDate = dateObj.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "2-digit" });
+    
+
     return (
         <div className="border-b border-gray-700 pb-4 w-[70em]">
             <div className="flex justify-start gap-2">
-                <Avatar name={author} size="small" /> <span className="text-xl font-semibold">{author ?? "Anonymous"}</span> <span className="text-xl">⋅</span> <span className="text-lg">{date}</span>
+                <Avatar name={author} size="sm" /> <span className="text-xl font-semibold">{author ?? "Anonymous"}</span> <span className="text-xl">⋅</span> <span className="text-lg">{formattedDate}</span>
             </div>
             <div className="mt-2">
                 <div className="text-3xl font-bold">
@@ -28,17 +32,17 @@ export const PostCard = ({ title, content, author, date}: PostCardProps) => {
 
 interface AvatarProps {
     name: string | undefined;
-    size: "small" | "big";
+    size: "sm" | "md" | "lg";
 }
 
 export const Avatar = ({ name, size }: AvatarProps) => {
     if(!name) {
         name = "A";
-    }
-    const initials = name.split(' ').map(word => word[0]).join('');
+    }    
+    const initials = name.split(' ')[0].charAt(0).toUpperCase() + ((name.split(' ').length ) > 1 ?(name.split(' ')[name.split(' ').length-1]?.charAt(0).toUpperCase()): "");
     return(
-        <div className={`relative inline-flex items-center justify-center ${size === "small" ? "w-7 h-7" : "w-10 h-10"} overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600`}>
-            <span className={`font-medium ${size === "small" ? "text-xs" : "text-base"} text-white dark:text-gray-300`}>{initials}</span>
+        <div className={`relative inline-flex items-center justify-center ${size === "sm" ? "w-7 h-7" : size === "md" ? "w-10 h-10" : "w-25 h-25"} overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600`}>
+            <span className={`font-medium ${size === "sm" ? "text-xs" : size === "md" ? "text-base": "text-5xl"} text-white`}>{initials}</span>
         </div>
     )
 }

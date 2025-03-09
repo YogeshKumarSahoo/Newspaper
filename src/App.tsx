@@ -5,6 +5,7 @@ import { Post } from './pages/Post'
 import { Posts } from './pages/Posts'
 import { Publish } from './pages/Publish'
 import ProtectedRoute from './utils/protected'
+import { Dashboard } from './pages/Dashboard'
 
 function App() {
 
@@ -17,8 +18,10 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/post/:id" element={<ProtectedRoute><Post /></ProtectedRoute>} />
           <Route path="/posts" element={<ProtectedRoute><Posts /></ProtectedRoute>} />
-          <Route path="/publish" element={<ProtectedRoute><Publish /></ProtectedRoute>} />
-          <Route path="/*" element={<div className='w-screen flex justify-center text-6xl font-bold'>404 PageNotFound</div>} />
+          <Route path="/publish" element={<ProtectedRoute><Publish type='new' /></ProtectedRoute>} />
+          <Route path="/publish/:id" element={<ProtectedRoute><Publish type='update' /></ProtectedRoute>} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/*" element={<Navigate to="/signin" />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -6,8 +6,11 @@ export interface PostType {
     id: string,
     title: string,
     content: string,
+    publishedAt: string,
+    updatedAt: string,
     author: {
-        name: string
+        name: string,
+        tagline: string,
     }
 }
 export const usePost = ({id}: { id: string }) => {
